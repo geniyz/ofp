@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartLinks</title>
+    <style>
+        textarea {
+            width: 97vw;
+            height: 47vh;
+        }
+        a {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<form
+        action="/"
+        method="POST"
+        id="frm"
+>
+    <textarea id="data"></textarea>
+    <input type="submit" />
+    <pre id="rez"></pre>
+</form>
+
+<script>
+    document.getElementById("frm").addEventListener("submit", (e)=>{
+        e.preventDefault()
+        window.fetch("/", {
+            method: "POST",
+            body: document.getElementById("data").value
+        })
+            .then(it=>it.text())
+            .then(it=>{
+                const r = document.getElementById("rez");
+                r.textContent = it;
+
+                const l = document.createElement("A");
+                const c = JSON.parse(it).code;
+                l.textContent = c;
+                l.setAttribute("href", "/"+c);
+                r.insertBefore(l, r.firstChild);
+            })
+    })
+</script>
+</body>
+</html>
