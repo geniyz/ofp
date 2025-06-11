@@ -29,12 +29,12 @@ class SimpleLinksService : ILinksService {
         context: Context,
         linkCode: String,
     ) : String? {
-        repo.findUrl(linkCode)
-            ?.rules
-            ?.forEach {
+        repo.findUrl(linkCode).rules
+            .map {
                 // получить из IoC класс, отвечающий за проверку
                 // передать ему в конструктор пришедший контекст и параметры указанные в правиле
-                val test by inject<IRule>(named(it.code)){ parametersOf(context, Context(it.params)) }
+                // val test by inject<IRule>(named(it.code)){ parametersOf(context, Context(it.params)) }
+                val test = get<IRule>(named(it.code)){ parametersOf(context, Context(it.params)) }
                 // вызвать обработку этого правила
                 // если true — значит это, что и требуется
                 if( test.execute() ) return it.href

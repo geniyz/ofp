@@ -24,9 +24,9 @@ class FilesRepo : IRepository {
         """)
     }
 
-    override fun findUrl(code: String): IUrl? {
+    override fun findUrl(code: String): IUrl {
             val f = Path(root, code)
-            if (f.notExists()) return null // error("Ссылка «$code» не найдена")
+            if (f.notExists()) return Link.NONE // error("Ссылка «$code» не найдена")
 
             val data = f.readText()
             if (data.isEmpty()) error("Ссылка «$code» плохая (")

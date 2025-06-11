@@ -6,6 +6,7 @@ plugins {
     val kotlinVersion = "2.1.21"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
     application
 }
 
@@ -47,9 +48,19 @@ dependencies {
 }
 
 application {
-    mainClass.set("site.geniyz.ofp.ApplicationKt")
+    mainClass.set("io.ktor.server.cio.EngineMain")
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+// перед запуском тестов собрать проект rules сложить его артефакты в libs -- необходимо для тестирования Loader
+val copyRulesLibs by tasks.register<Copy>("copyRulesLibs") {
+    from(project(":rules").layout.buildDirectory.dir("libs"))
+    into(layout.projectDirectory.dir("libs"))
+    include("*.jar")
+}
+tasks.named("test") {
+    dependsOn(":rules:build", copyRulesLibs)
 }

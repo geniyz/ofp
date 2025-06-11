@@ -9,7 +9,7 @@ interface IRepository {
     /**
      * найти ссылку по коду
      */
-    fun findUrl(code : String): IUrl?
+    fun findUrl(code : String): IUrl
 
     /**
      * добавить ссылку

@@ -1,8 +1,6 @@
 package site.geniyz.ofp.rule
 
 import site.geniyz.ofp.cntxt.Context
-import site.geniyz.ofp.core.EmptyUObject
-import site.geniyz.ofp.core.Executable
 import site.geniyz.ofp.core.UObject
 
 /**
@@ -12,7 +10,7 @@ import site.geniyz.ofp.core.UObject
  */
 class AbsoluteRule(
     override val context: Context = Context.NONE,
-    override val params: UObject = EmptyUObject(),
+    override val params: UObject = context,
 ) : IRule {
     override fun execute() = true
 }

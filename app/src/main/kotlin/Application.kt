@@ -30,9 +30,8 @@ fun Application.main() {
 
         modules( buildList { // подгрузить из каталога с плагинами/дополнениями/библиотеками:
             Loader.load( "libs", IRule::class.java ) { clazz, constructor ->
-                add( module {
-                    factory( named(clazz.canonicalName) ) // имя/код правила — это полное наименование Класса
-                    { (c: Context, p: UObject) -> constructor!!.call(c, p) as IRule } // вызвать конструктор и передать ему необходимые значения, и привести это всё к IRule
+                add( module { // имя/код правила — это полное наименование Класса
+                    factory( named(clazz.canonicalName) ){ (c: Context, p: UObject) -> constructor!!.call(c, p) as IRule } // вызвать конструктор и передать ему необходимые значения, и привести это всё к IRule
                 }) }
 
             Loader.load( "libs", IRepository::class.java ) { clazz, constructor -> add( module { single { constructor!!.call() as IRepository } }) }
@@ -69,8 +68,8 @@ fun Application.main() {
                 val link = Link(service.save(ContextAdapter(call), call.receiveText()))
                 call.respondText(json.encodeToString(link), status = HttpStatusCode.Created)
             }catch (t: Throwable){
-                log.error("""${t.localizedMessage} {} {}""", call.receiveText(), t)
                 call.respondText(t.stackTraceToString(), status = HttpStatusCode.InternalServerError)
+                log.error("""${t.localizedMessage} {} {}""", call.receiveText(), t)
             }
         }
 
@@ -78,4 +77,4 @@ fun Application.main() {
     }
 }
 
-fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
+// fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)

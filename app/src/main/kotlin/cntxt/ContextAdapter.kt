@@ -8,7 +8,7 @@ import io.ktor.util.toMap
  * формирует контекст на основе заголовков http
  */
 class ContextAdapter(
-    params: MutableMap<String, Any?> = mutableMapOf()
+    private val params: MutableMap<String, Any?> = mutableMapOf()
 ): Context(params) {
     constructor(call: RoutingCall): this(
         call.request.headers.toMap().toMutableMap()

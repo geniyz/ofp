@@ -6,6 +6,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.junit.Test
+import org.junit.jupiter.api.assertThrows
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.test.AutoCloseKoinTest
 import site.geniyz.ofp.di.appModule
@@ -42,8 +43,9 @@ class MemoRepoTest: AutoCloseKoinTest() {
         repo.addUrl(link)
 
         val resp = repo.findUrl(link.code)
-
         assertEquals(link, resp)
 
+        val exception = assertThrows<Throwable> { repo.addUrl(link) }
+        assertEquals("Адрес «testByHour» уже занят", exception.message)
     }
 }

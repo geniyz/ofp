@@ -14,10 +14,10 @@ val appModule = module { // дефолтные реализации
     single(named("content404")) { Content("NOTFOUND") }
 
     // дефолтная реализация хранилища
-    singleOf(::MemoRepo) { bind<IRepository>() }
+    single { MemoRepo() as IRepository } // singleOf(::MemoRepo) { bind<IRepository>() }
 
     // дефолтная реализация «Сервиса»
-    singleOf(::SimpleLinksService) { bind<ILinksService>() }
+    single { SimpleLinksService() as ILinksService } // singleOf(::SimpleLinksService) { bind<ILinksService>() }
 
     // вшитые правила
     factory( named(AbsoluteRule::class.qualifiedName!!) ){ (c: Context, p: UObject) -> AbsoluteRule(c, p) as IRule }

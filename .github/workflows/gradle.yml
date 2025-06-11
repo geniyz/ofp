@@ -37,6 +37,16 @@ jobs:
         with:
           arguments: check -i
 
+      - name: Make Kover report
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: koverHtmlReport
+
+      - name: View application line coverage
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: koverPrintCoverage
+
       - name: Save Primes
         id: cache-primes-save
         uses: actions/cache/save@v4
