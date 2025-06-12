@@ -47,6 +47,12 @@ jobs:
         with:
           arguments: koverPrintCoverage
 
+      - name: Upload Kover report
+        uses: actions/upload-artifact@v4
+        with:
+          name: kover-report
+          path: build/reports/kover/html
+
       - name: Save Primes
         id: cache-primes-save
         uses: actions/cache/save@v4
