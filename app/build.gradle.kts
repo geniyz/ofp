@@ -37,13 +37,6 @@ dependencies {
     testImplementation("io.insert-koin:koin-test-junit4:$koinVersion")
     testImplementation("org.mockito:mockito-inline:4.8.0")
 
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth-jvm:${ktorVersion}")
-    testImplementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-auth-jwt-jvm:$ktorVersion")
-
     implementation("org.reflections:reflections:0.10.2")
 }
 

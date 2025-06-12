@@ -15,29 +15,13 @@ repositories {
 }
 
 dependencies {
-
     implementation(project(":app"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
-
-    implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
-
-    implementation("ch.qos.logback:logback-classic:1.5.18")
-
-    implementation("io.insert-koin:koin-ktor:$koinVersion")
-    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
-
-    testImplementation("io.insert-koin:koin-test:$koinVersion")
-    testImplementation("io.insert-koin:koin-test-junit4:$koinVersion")
-
-    implementation("org.reflections:reflections:0.10.2")
+    testImplementation ("io.insert-koin:koin-test:${koinVersion}")
+    testImplementation("io.insert-koin:koin-test-junit4:${koinVersion}")
+    testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-core:${serialize}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${serialize}")
 }
 
 java {

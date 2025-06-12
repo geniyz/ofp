@@ -2,9 +2,6 @@
 
 package site.geniyz.ofp
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.junit.Test
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.test.AutoCloseKoinTest
@@ -37,14 +34,12 @@ class FilesRepoTest: AutoCloseKoinTest() {
 
         val repo: IRepository = FilesRepo() // by inject<IRepository>()
 
-        val currentHour = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).hour
-
         val link = Link(code = "testByHour",
             listOf(
                 RuleAPI(
                     code = "site.geniyz.ofp.rule.ByHourRule",
                     href = testUrl1,
-                    params = mapOf("hour" to "${currentHour-1};${currentHour};${currentHour+1}"),
+                    params = mapOf("hour" to "11"),
                 )
             )
         )
