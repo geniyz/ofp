@@ -1,6 +1,5 @@
 package site.geniyz.ofp.di
 
-import org.koin.core.module.dsl.*
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import site.geniyz.ofp.cntxt.Context

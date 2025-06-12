@@ -15,7 +15,9 @@ import site.geniyz.ofp.json
  * без изысков
  */
 class SimpleLinksService : ILinksService {
+
     override var repo: IRepository = get() // получить реализацию из IoC
+
     override fun save(
         context: Context,
         urlData: String,

@@ -20,8 +20,6 @@ import site.geniyz.ofp.di.Loader
 import site.geniyz.ofp.repo.IRepository
 import site.geniyz.ofp.rule.IRule
 import site.geniyz.ofp.url.Link
-import java.io.File
-import kotlin.jvm.Throws
 
 fun Application.main() {
     install(Koin) { // При старте приложения произвести инициализацию IoC
