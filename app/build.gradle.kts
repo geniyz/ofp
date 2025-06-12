@@ -57,6 +57,7 @@ java {
 
 // перед запуском тестов собрать проект rules сложить его артефакты в libs -- необходимо для тестирования Loader
 val copyRulesLibs by tasks.register<Copy>("copyRulesLibs") {
+    dependsOn(":rules:build")
     from(project(":rules").layout.buildDirectory.dir("libs"))
     into(layout.projectDirectory.dir("libs"))
     include("*.jar")
