@@ -32,6 +32,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
         with:
@@ -47,11 +50,20 @@ jobs:
         with:
           arguments: koverPrintCoverage
 
-      - name: Upload Kover report
+      - name: Upload Kover report to Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: kover-report
-          path: build/reports/kover/html
+          path: app/build/reports/kover/html
+
+      - name: Upload Kover report to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/build/reports/kover/html
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: actions/deploy-pages@v4
 
       - name: Save Primes
         id: cache-primes-save
