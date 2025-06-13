@@ -13,6 +13,9 @@ object Loader {
         vararg ifaces: Class<*>,
         crossinline transform: (Class<*>, kotlinFunction: KFunction<Any>?)->Unit
     ){
+        println("""
+            КАТАЛОГ РАСШИРЕНИЙ: ${File(dir).absolutePath }
+        """.trimIndent())
         (File(dir).listFiles { file -> file.extension == "jar" } ?: emptyArray())
             .map { jarFile ->
                 Reflections(
@@ -25,6 +28,9 @@ object Loader {
                         classes.map { k ->
                             try {
                                 transform(k, k.constructors.first().kotlinFunction)
+                                println("""
+                                    ЗАГРУЖЕНО: ${k} (${k.constructors.first().kotlinFunction})
+                                """.trimIndent())
                             } catch (t: Throwable) {
                                 println("Failed to load «${k.canonicalName}»: ${t.localizedMessage}")
                             } }

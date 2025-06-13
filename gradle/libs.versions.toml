@@ -1,0 +1,80 @@
+[versions]
+kotlin                   = "2.1.21"                # Язык программирования Kotlin
+serialization            = "1.8.1"                 # Сериализация данных (JSON и др.)
+kxDatetime               = "0.6.2"                 # Дата/время для Kotlin Multiplatform
+ktor                     = "3.1.3"                 # Веб-фреймворк для бэкенда
+logback                  = "1.5.18"                # Базовый фреймворк логирования
+hikari                   = "6.3.0"                 # Пул соединений с БД
+exposed                  = "1.0.0-beta-2"          # ORM для Kotlin
+postgres                 = "42.7.2"                # Драйвер PostgreSQL
+h2                       = "2.2.224"               # Драйвер H2
+koin                     = "4.0.0"                 # IoC
+reflections              = "0.10.2"
+kover                    = "0.9.1"
+ioCore                   = "0.7.0"
+
+[libraries]
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref="koin"}
+koin-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref="koin"}
+
+koin-test = { module = "io.insert-koin:koin-test", version.ref="koin"}
+koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref="koin"}
+
+reflections = { module = "org.reflections:reflections", version.ref="reflections"}
+
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }                                    # Рефлексия Kotlin
+kotlin-scripting-jsr223 = { module = "org.jetbrains.kotlin:kotlin-scripting-jsr223", version.ref = "kotlin" }                  # Скриптование на Kotlin
+
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }    # Сериализация
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }    # Сериализация JSON
+
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "ioCore" }
+
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kxDatetime" }                           # Дата/время
+
+hikari = {module = "com.zaxxer:HikariCP", version.ref = "hikari"}                                                              # Пул соединений
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }                                                # PostgreSQL
+h2 = { module = "com.h2database:h2", version.ref = "h2" }                                                # PostgreSQL
+
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }                                      # Exosed
+exposed-migration = { module = "org.jetbrains.exposed:exposed-migration", version.ref = "exposed" }                            # поддержка миграций
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }                                      # JDBC
+exposed-kotlin-datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed" }                # Работа с датами
+
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }                                               # HTTP-сервер
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }                                       #
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }                 # преобразование контента (JSON)
+ktor-server-content-negotiation-jvm = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor" }         # преобразование контента (JSON)
+ktor-server-http-redirect = { module = "io.ktor:ktor-server-http-redirect", version.ref = "ktor" }                             # переадресация
+ktor-server-http-redirect-jvm = { module = "io.ktor:ktor-server-http-redirect-jvm", version.ref = "ktor" }                     #
+ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }                                               # CORS
+ktor-server-cors-jvm = { module = "io.ktor:ktor-server-cors-jvm", version.ref = "ktor" }                                       #
+
+ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref = "ktor" }                                     # организация доступа к ресурсам приложения
+ktor-server-resources-jvm = { module = "io.ktor:ktor-server-resources-jvm", version.ref = "ktor" }                             #
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }                                                 # основанная на корутинах реализация сервера
+ktor-server-cio-jvm = { module = "io.ktor:ktor-server-cio-jvm", version.ref = "ktor" }                                         #
+
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }                                               # HTTP-клиент
+ktor-client-core-jvm = { module = "io.ktor:ktor-client-core-jvm", version.ref = "ktor" }                                       #
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }                                                 # основанная на корутинах реализация клиента
+ktor-client-cio-jvm = { module = "io.ktor:ktor-client-cio-jvm", version.ref = "ktor" }                                         #
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }                 # преобразования данных / сериализация
+ktor-client-content-negotiation-jvm = { module = "io.ktor:ktor-client-content-negotiation-jvm", version.ref = "ktor" }         #
+
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }                 # сериализация в/из JSON
+ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm", version.ref = "ktor" }         #
+
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }                              # основные штуки для тестирования
+ktor-test-host = { module = "io.ktor:ktor-test-host", version.ref = "ktor" }                                                   #
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }                                     #
+ktor-server-test-host-jvm = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }                             #
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }                                       # Реализация SLF4J
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref="kover" }

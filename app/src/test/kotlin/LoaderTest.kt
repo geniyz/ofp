@@ -36,7 +36,7 @@ class LoaderTest: AutoCloseKoinTest() {
             }
         }
 
-        Loader.load("libs", IRule::class.java) { clazz, constructor ->
+        Loader.load("../addons", IRule::class.java) { clazz, constructor ->
             getKoin().loadModules( listOf(
                 module { // имя/код правила — это полное наименование Класса
                     factory(named(clazz.canonicalName)) { (c: Context, p: UObject) ->

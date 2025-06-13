@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/repo-db" />
             <option value="$PROJECT_DIR$/repo-fs" />
             <option value="$PROJECT_DIR$/rules" />
           </set>

@@ -1,11 +1,6 @@
-val koinVersion = "4.0.0"
-val serialize   = "1.8.1"
-val ioCore      = "0.7.0"
-
 plugins {
-    val kotlinVersion = "2.1.21"
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.serialization") version kotlinVersion
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.serialization)
 }
 
 repositories {
@@ -18,15 +13,15 @@ dependencies {
 
     implementation(project(":app"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
+    implementation(libs.kotlinx.serialization.core)
+    implementation (libs.kotlinx.serialization.json)
+    testImplementation(libs.kotlinx.serialization.core)
+    testImplementation(libs.kotlinx.serialization.json)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-io-core:$ioCore")
+    implementation(libs.kotlinx.io.core)
 
-    testImplementation("io.insert-koin:koin-test:${koinVersion}")
-    testImplementation("io.insert-koin:koin-test-junit4:${koinVersion}")
+    testImplementation(libs.koin.test)
+    testImplementation(libs.koin.test.junit4)
 }
 
 java {

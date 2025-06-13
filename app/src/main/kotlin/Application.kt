@@ -27,13 +27,13 @@ fun Application.main() {
         modules(appModule) // произвести первичное дефолтное связывание (см. appModule.kt)
 
         modules( buildList { // подгрузить из каталога с плагинами/дополнениями/библиотеками:
-            Loader.load( "libs", IRule::class.java ) { clazz, constructor ->
+            Loader.load( "../addons", IRule::class.java ) { clazz, constructor ->
                 add( module { // имя/код правила — это полное наименование Класса
                     factory( named(clazz.canonicalName) ){ (c: Context, p: UObject) -> constructor!!.call(c, p) as IRule } // вызвать конструктор и передать ему необходимые значения, и привести это всё к IRule
                 }) }
 
-            Loader.load( "libs", IRepository::class.java ) { clazz, constructor -> add( module { single { constructor!!.call() as IRepository } }) }
-            Loader.load( "libs", ILinksService::class.java ) { clazz, constructor -> add( module { single { constructor!!.call() as ILinksService } }) }
+            Loader.load( "../addons", IRepository::class.java ) { clazz, constructor -> add( module { single { constructor!!.call() as IRepository } }) }
+            Loader.load( "../addons", ILinksService::class.java ) { clazz, constructor -> add( module { single { constructor!!.call() as ILinksService } }) }
         })
     }
 

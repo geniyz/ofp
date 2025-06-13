@@ -1,12 +1,7 @@
-val koinVersion = "4.0.0"
-val ktorVersion = "3.1.3"
-val serialize   = "1.8.1"
-
 plugins {
-    val kotlinVersion = "2.1.21"
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.kover)
     application
 }
 
@@ -17,27 +12,26 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+    implementation(libs.kotlinx.datetime)
+    testImplementation(libs.kotlinx.datetime)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialize")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialize")
+    implementation(libs.kotlinx.serialization.core)
+    implementation (libs.kotlinx.serialization.json)
+    testImplementation(libs.kotlinx.serialization.core)
+    testImplementation(libs.kotlinx.serialization.json)
 
-    implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+    implementation(libs.ktor.server.cio)
+    testImplementation(libs.ktor.server.test.host)
 
-    implementation("ch.qos.logback:logback-classic:1.5.18")
+    implementation(libs.logback.classic)
 
-    implementation("io.insert-koin:koin-ktor:$koinVersion")
-    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.slf4j)
 
-    testImplementation("io.insert-koin:koin-test:$koinVersion")
-    testImplementation("io.insert-koin:koin-test-junit4:$koinVersion")
-    testImplementation("org.mockito:mockito-inline:4.8.0")
+    testImplementation(libs.koin.test)
+    testImplementation(libs.koin.test.junit4)
 
-    implementation("org.reflections:reflections:0.10.2")
+    implementation(libs.reflections)
 }
 
 application {
@@ -52,7 +46,7 @@ java {
 val copyRulesLibs by tasks.register<Copy>("copyRulesLibs") {
     dependsOn(":rules:build")
     from(project(":rules").layout.buildDirectory.dir("libs"))
-    into(layout.projectDirectory.dir("libs"))
+    into(rootProject.layout.projectDirectory.dir("addons"))
     include("*.jar")
 }
 tasks.named("test") {

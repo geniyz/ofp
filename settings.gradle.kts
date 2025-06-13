@@ -20,3 +20,4 @@ dependencyResolutionManagement {
 include(":app")
 include(":rules")
 include(":repo-fs")
+include(":repo-db")

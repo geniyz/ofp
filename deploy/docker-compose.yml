@@ -1,0 +1,51 @@
+services:
+  ofp-app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: site-geniyz-ofp-app
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      PORT: 8080
+      USE_SYSTEM_CA_CERTS: 1
+      TZ: MSK
+      LOG_LEVEL: DEBUG
+
+      SMARTLINKS_CONNECTSTRING: postgresql://ofp-database:5432/ofp
+      SMARTLINKS_USER: postgres
+      SMARTLINKS_PASSWORD: DB_PASSWORD
+
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 http://localhost:8080/ -O- || exit 1" ]
+      interval: 30s
+      timeout:  15s
+      retries:  5
+
+    depends_on:
+      ofp-database:
+        condition: service_healthy
+
+  ofp-database:
+    image: postgres:17-alpine
+    container_name: site-geniyz-ofp-db
+    restart: always
+    volumes:
+      - ofp-postgresdata:/var/lib/postgresql/data
+      - ./postgres-initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_PASSWORD: DB_PASSWORD
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ofp
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_HOST_AUTH_METHOD: md5
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d ofp" ]
+      interval: 30s
+      timeout:  15s
+      retries:  5
+
+volumes:
+  ofp-postgresdata:
