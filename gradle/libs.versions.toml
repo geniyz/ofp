@@ -1,19 +1,81 @@
 [versions]
-kotlin                   = "2.1.21"                # Язык программирования Kotlin
-serialization            = "1.8.1"                 # Сериализация данных (JSON и др.)
-kxDatetime               = "0.6.2"                 # Дата/время для Kotlin Multiplatform
-ktor                     = "3.1.3"                 # Веб-фреймворк для бэкенда
+## основа
+gnz                      = "0.4.2"
+kotlin                   = "2.2.21"                # Язык программирования Kotlin
+serialization            = "1.9.0"                 # Сериализация данных (JSON и др.)
+# DEPRECATED: datetime                 = "0.7.1"                 # Дата/время для Kotlin Multiplatform
+coroutines               = "1.10.2"                # Асинхронное программирование (корутины)
+atomicfu                 = "0.29.0"                # Атомарные операции для Kotlin
+ktor                     = "3.2.3"                 # Веб-фреймворк для бэкенда
+koin                     = "4.1.0"                 # IoC
+reflections              = "0.10.2"                # рефлексия
+io                       = "0.8.0"                 # мультиплатформенный ввод-вывод
+config                   = "1.4.3"                 # парсилка кнфигов
+
+moduleplugin             = "1.8.12"
+javafxplugin             = "0.1.0"
+jlink                    = "2.25.0"
+
+# javafx                   = "21"
+
+# ktorSimpleCache          = "0.53.4" # выпилить
+
+## nodejs (для фронтэнда так-то)
+nodePlugin               = "7.1.0"                 # Плагин для работы с Node.js
+
+## Логирование
 logback                  = "1.5.18"                # Базовый фреймворк логирования
-hikari                   = "6.3.0"                 # Пул соединений с БД
-exposed                  = "1.0.0-beta-2"          # ORM для Kotlin
-postgres                 = "42.7.2"                # Драйвер PostgreSQL
+# kermit                   = "2.0.5"               # выпилить
+logstashLogbackEncoder   = "8.1"                   # Форматирование логов для ELK-стека
+logbackMoreAppenders     = "1.8.8"                 # Дополнительные аппендеры (Syslog, Kafka и др.)
+fluentLogger             = "0.3.4"                 # Интеграция с Fluentd
+janino                   = "3.1.12"                # Условная обработка конфигов логирования
+
+## Базы данных
+hikari                   = "7.0.1"                 # Пул соединений с БД
+exposed                  = "1.0.0-beta-5"          # ORM для Kotlin
+postgres                 = "42.7.7"                # Драйвер PostgreSQL
 h2                       = "2.2.224"               # Драйвер H2
-koin                     = "4.0.0"                 # IoC
-reflections              = "0.10.2"
-kover                    = "0.9.1"
-ioCore                   = "0.7.0"
+# oracle                   = "23.3.0.23.09"          # Драйвер Oracle
+oracle                   = "12.2.0.1"
+clickhouse               = "0.9.1"                 # драйвер ClickHouse
+
+# кэширование
+kache                    = "2.1.1"
+# cache4k                  = "0.11.0"
+
+poi                      = "5.4.1"                 # Работа с Excel/Word
+
+## работа с гитом
+jgit                     = "7.3.0.202506031305-r"  # Java-реализация Git
+
+## разработка АПИ
+openapi                  = "7.13.0"                # Генерация OpenAPI-спецификаций
+
+## грааль
+graal                    = "0.9.19"                # Поддержка нативных образов
+
+## тестирование
+testcontainers           = "1.21.3"                # Контейнеры для интеграционных тестов
+kover                    = "0.9.1"                 # покрытие кода тестами
+
+pdfbox                   = "3.0.5"                 # Работа с PDF
+plantuml                 = "1.2025.4"              # Генерация диаграмм
+
+# работа с текстом
+diff                     = "4.16"                  # сравнивалка
+icu4j                    = "77.1"                  # Интернационализация (i18n)
+aot                      = "2025.02.15"            # Морфологический анализ (AOT)
+
+kafkaClient              = "4.0.0"                 # Клиент Apache Kafka
+batik                    = "1.19"                  # Работа с SVG/векторной графикой
+
+mail                     = "2.0.2"                 # Для отправки писем
 
 [libraries]
+
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref="koin"}
 koin-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref="koin"}
 
@@ -28,53 +90,157 @@ kotlin-scripting-jsr223 = { module = "org.jetbrains.kotlin:kotlin-scripting-jsr2
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }    # Сериализация
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }    # Сериализация JSON
 
-kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "ioCore" }
-
-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kxDatetime" }                           # Дата/время
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "io" }                                     # Мультиплатформенный ввод-вывод
+kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }                                     # Атомарные операции
+# DEPRECATED: kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }                             # Дата/время
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }             # Корутины
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }             # Корутины для тестов
 
 hikari = {module = "com.zaxxer:HikariCP", version.ref = "hikari"}                                                              # Пул соединений
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }                                                # PostgreSQL
-h2 = { module = "com.h2database:h2", version.ref = "h2" }                                                # PostgreSQL
+h2 = { module = "com.h2database:h2", version.ref = "h2" }                                                                      # H2
+# oracle = {module = "com.oracle.database.jdbc:ojdbc-bom", version.ref = "oracle"}                                               # Oracle
+oracle = {module = "com.oracle.jdbc:ojdbc8", version.ref = "oracle"}                                                           # Oracle
+clickhouse = {module = "com.clickhouse:clickhouse-jdbc", version.ref = "clickhouse"}                                           # ClickHouse
+
+kache = {module = "com.mayakapps.kache:kache", version.ref = "kache" }
+kache-file = {module = "com.mayakapps.kache:file-kache", version.ref = "kache" }
+
+# cache4k = {module = "io.github.reactivecircus.cache4k:cache4k", version.ref="cache4k"}                                         # Кэш в памяти
 
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }                                      # Exosed
 exposed-migration = { module = "org.jetbrains.exposed:exposed-migration", version.ref = "exposed" }                            # поддержка миграций
+#exposed-r2dbc = { module = "org.jetbrains.exposed:exposed-r2dbc", version.ref = "exposed" }                                   # Реактивная работа с БД
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }                                      # JDBC
 exposed-kotlin-datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed" }                # Работа с датами
+exposed-dao = {module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed"}                                          # DAO
 
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }                                               # HTTP-сервер
 ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }                                       #
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }                 # преобразование контента (JSON)
 ktor-server-content-negotiation-jvm = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor" }         # преобразование контента (JSON)
+ktor-server-metrics = { module = "io.ktor:ktor-server-metrics", version.ref = "ktor" }                                         #
+ktor-server-metrics-jvm = { module = "io.ktor:ktor-server-metrics-jvm", version.ref = "ktor" }                                 #
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }                               # логирование запросов
+ktor-server-call-logging-jvm = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor" }                       #
+ktor-server-call-id = { module = "io.ktor:ktor-server-call-id", version.ref = "ktor" }                                         # идентификация запросов
+ktor-server-call-id-jvm = { module = "io.ktor:ktor-server-call-id-jvm", version.ref = "ktor" }                                 #
 ktor-server-http-redirect = { module = "io.ktor:ktor-server-http-redirect", version.ref = "ktor" }                             # переадресация
 ktor-server-http-redirect-jvm = { module = "io.ktor:ktor-server-http-redirect-jvm", version.ref = "ktor" }                     #
+ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }                         # указание дефолтных значений заголовков
+ktor-server-default-headers-jvm = { module = "io.ktor:ktor-server-default-headers-jvm", version.ref = "ktor" }                 #
 ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }                                               # CORS
 ktor-server-cors-jvm = { module = "io.ktor:ktor-server-cors-jvm", version.ref = "ktor" }                                       #
+ktor-server-compression = { module = "io.ktor:ktor-server-compression", version.ref = "ktor" }                                 # сжатие данных
+ktor-server-compression-jvm = { module = "io.ktor:ktor-server-compression-jvm", version.ref = "ktor" }                         #
+ktor-server-caching-headers = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }                         # кэширующие заголовки
+ktor-server-caching-headers-jvm = { module = "io.ktor:ktor-server-caching-headers-jvm", version.ref = "ktor" }                 #
+ktor-server-forwarded-header = { module = "io.ktor:ktor-server-forwarded-header", version.ref = "ktor" }                       # для работать с заголовками обратного прокси-сервера, чтобы получать информацию об исходном запросе, когда сервер Ktor находится за обратным прокси-сервером
+ktor-server-forwarded-header-jvm = { module = "io.ktor:ktor-server-forwarded-header-jvm", version.ref = "ktor" }               #
 
+ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }                               # для глобальной обработки ошибок
+ktor-server-status-pages-jvm = { module = "io.ktor:ktor-server-status-pages-jvm", version.ref = "ktor" }                       #
+ktor-server-sse = { module = "io.ktor:ktor-server-sse", version.ref = "ktor" }                                                 # SSE
+ktor-server-sse-jvm = { module = "io.ktor:ktor-server-sse-jvm", version.ref = "ktor" }                                         #
+ktor-server-websockets = { module = "io.ktor:ktor-server-websockets", version.ref = "ktor" }                                   # WS
 ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref = "ktor" }                                     # организация доступа к ресурсам приложения
 ktor-server-resources-jvm = { module = "io.ktor:ktor-server-resources-jvm", version.ref = "ktor" }                             #
+ktor-server-double-receive = { module = "io.ktor:ktor-server-double-receive", version.ref = "ktor" }                           # позволяет повторно считывать данные запроса
+ktor-server-double-receive-jvm = { module = "io.ktor:ktor-server-double-receive-jvm", version.ref = "ktor" }                   #
+ktor-server-auto-head-response = { module = "io.ktor:ktor-server-auto-head-response", version.ref = "ktor" }                   # автоответы на запросы OPTION
+ktor-server-auto-head-response-jvm = { module = "io.ktor:ktor-server-auto-head-response-jvm", version.ref = "ktor" }           #
+ktor-server-sessions = { module = "io.ktor:ktor-server-sessions", version.ref = "ktor" }                                       # сессионные переменные
+ktor-server-sessions-jvm = { module = "io.ktor:ktor-server-sessions-jvm", version.ref = "ktor" }                               #
+ktor-server-csrf = { module = "io.ktor:ktor-server-csrf", version.ref = "ktor" }                                               # CSRF
+ktor-server-csrf-jvm = { module = "io.ktor:ktor-server-csrf-jvm", version.ref = "ktor" }                                       #
+ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }                                               # организация авторизации
+ktor-server-auth-jvm = { module = "io.ktor:ktor-server-auth-jvm", version.ref = "ktor" }                                       #
+ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor" }                                       # работа с токенами JWT
+ktor-server-auth-jwt-jvm = { module = "io.ktor:ktor-server-auth-jwt-jvm", version.ref = "ktor" }                               #
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }                                                 # основанная на корутинах реализация сервера
 ktor-server-cio-jvm = { module = "io.ktor:ktor-server-cio-jvm", version.ref = "ktor" }                                         #
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }                                 # Возможность писать конфиги в формате ямл
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }                                               # HTTP-клиент
 ktor-client-core-jvm = { module = "io.ktor:ktor-client-core-jvm", version.ref = "ktor" }                                       #
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }                                                 # основанная на корутинах реализация клиента
 ktor-client-cio-jvm = { module = "io.ktor:ktor-client-cio-jvm", version.ref = "ktor" }                                         #
+# ktor-client-apache-jvm = { module = "io.ktor:ktor-client-apache-jvm", version.ref = "ktor" }                                   # реализация клиента на основе библиотеки Apache
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }                 # преобразования данных / сериализация
 ktor-client-content-negotiation-jvm = { module = "io.ktor:ktor-client-content-negotiation-jvm", version.ref = "ktor" }         #
+ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktor" }                                   # WS
+
+# ktor-simple-cache = { module = "com.ucasoft.ktor:ktor-simple-cache", version.ref = "ktorSimpleCache" }
+# ktor-simple-cache-jvm = { module = "com.ucasoft.ktor:ktor-simple-cache-jvm", version.ref = "ktorSimpleCache" }
+# ktor-simple-memory-cache = { module = "com.ucasoft.ktor:ktor-simple-memory-cache", version.ref = "ktorSimpleCache" }
+# ktor-simple-memory-cache-jvm = { module = "com.ucasoft.ktor:ktor-simple-memory-cache-jvm", version.ref = "ktorSimpleCache" }
 
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }                 # сериализация в/из JSON
 ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm", version.ref = "ktor" }         #
+
+jgit = { module = "org.eclipse.jgit:org.eclipse.jgit", version.ref = "jgit" }                                                  # Java реализация git
+
+poi = { module = "org.apache.poi:poi", version.ref = "poi" }                                                                   # работа с Excel|Word
+poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }                                                       #
+poi-ooxml-full = { module = "org.apache.poi:poi-ooxml-full", version.ref = "poi" }                                             #
 
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }                              # основные штуки для тестирования
 ktor-test-host = { module = "io.ktor:ktor-test-host", version.ref = "ktor" }                                                   #
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }                                     #
 ktor-server-test-host-jvm = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }                             #
+testcontainers-postgresql = {module = "org.testcontainers:postgresql", version.ref="testcontainers"}                           # интеграционное тестирование с postgresql
 
+
+# kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }                                       # Реализация SLF4J
+logback-more-appenders = { module = "com.sndyuk:logback-more-appenders", version.ref = "logbackMoreAppenders" }                # Дополнительные аппендеры
+fluent-logger = { module = "org.fluentd:fluent-logger", version.ref = "fluentLogger" }                                         # Интеграция с Fluentd
+logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstashLogbackEncoder"} # Форматирование логов для ELK-стека
+janino = {module = "org.codehaus.janino:janino", version.ref = "janino" }                                                      # условные опреаторы в конфиге logback
+# logback-kafka-appender = {module = "com.github.danielwegener:logback-kafka-appender", version.ref="logbackKafkaAppender"}
+
+mail = { module = "com.sun.mail:jakarta.mail", version.ref = "mail" }                                                          # отправка электропочты
+
+w3c-dom = { module = "org.w3c:dom", version="2.3.0-jaxb-1.0.6" } # умирает, выпилить                                           # реализация W3C Document Object Model (DOM) API для Java
+
+batik-transcoder = {module = "org.apache.xmlgraphics:batik-transcoder", version.ref="batik"}                                   # конвертация SVG в другие форматы
+batik-codec = {module = "org.apache.xmlgraphics:batik-codec", version.ref="batik"}                                             # работа с растровыми изображениями
+
+pdfbox =  {module = "org.apache.pdfbox:pdfbox", version.ref="pdfbox"}                                                          # работа с PDF
+plantuml = {module = "net.sourceforge.plantuml:plantuml-mit", version.ref="plantuml"}                                          # работа с диаграммами PlantUML
+
+icu4j = {module = "com.ibm.icu:icu4j", version.ref="icu4j"}                                                                    # Поддержка Unicode; Транслитерация; Нормализация текста (NFC, NFD, NFKC, NFKD); Форматирование дат, чисел, валют; Плюрализация; Сортировка с учётом языка; Анализ текста: Разбиение на слова/предложения; Определение границ символов; Конвертация кодировок;
+aot = {module = "com.github.demidko:aot", version.ref = "aot"}                                                                 # Морфологический анализатор русского языка: Морфологического анализа русских слов; Лемматизации (приведение слов к начальной форме); Определения грамматических характеристик (часть речи, падеж, число и др.)
+diff = {module = "io.github.java-diff-utils:java-diff-utils", version.ref = "diff"}                                            # сравнивалка
+
+kafka-client = { module = "org.apache.kafka:kafka-clients", version.ref = "kafkaClient" }                                      # работа с Кафкой
+
+
+# javafx-base     = { module = "org.openjfx:javafx-base",     version.ref = "javafx" }
+# javafx-controls = { module = "org.openjfx:javafx-controls", version.ref = "javafx" }
+# javafx-graphics = { module = "org.openjfx:javafx-graphics", version.ref = "javafx" }
+# javafx-fxml     = { module = "org.openjfx:javafx-fxml",     version.ref = "javafx" }
+
+config = {module = "com.typesafe:config", version.ref = "config" }
+
+gnz-core   = { module = "site.geniyz:core",   version.ref="gnz" } # Executable, UObject, Конфигурирование, IoC, сериализация, базовые модельки, логирование
+gnz-web    = { module = "site.geniyz:web",    version.ref="gnz" } # бойлерплей для KTor
+gnz-db     = { module = "site.geniyz:db",     version.ref="gnz" } # работа с БД
+gnz-cache  = { module = "site.geniyz:cache",  version.ref="gnz" } # кэширование
+gnz-mail   = { module = "site.geniyz:mail",   version.ref="gnz" } # рабобта с электропочтой
+gnz-log-db = { module = "site.geniyz:log-db", version.ref="gnz" } # логгирование в БД
+gnz-log-ch = { module = "site.geniyz:log-ch", version.ref="gnz" } # логгирование в кликхаус
+gnz-str    = { module = "site.geniyz:str",    version.ref="gnz" } # работа со строками
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+node = { id = "com.github.node-gradle.node", version.ref="nodePlugin" }
+openapi = { id = "org.openapi.generator", version.ref="openapi" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref="kover" }
+
+moduleplugin = { id = "org.javamodularity.moduleplugin", version.ref="moduleplugin" }
+javafxplugin = { id = "org.openjfx.javafxplugin", version.ref="javafxplugin" }
+jlink = { id = "org.beryx.jlink", version.ref="jlink" }

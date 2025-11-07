@@ -8,13 +8,9 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    google()
 }
 
 dependencies {
-    implementation(libs.kotlinx.datetime)
-    testImplementation(libs.kotlinx.datetime)
-
     implementation(libs.kotlinx.serialization.core)
     implementation (libs.kotlinx.serialization.json)
     testImplementation(libs.kotlinx.serialization.core)
