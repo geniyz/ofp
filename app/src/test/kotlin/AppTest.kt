@@ -7,9 +7,7 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.*
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 import org.junit.Test
 import org.koin.core.qualifier.named
 import org.koin.test.AutoCloseKoinTest
@@ -17,9 +15,14 @@ import org.koin.test.inject
 import site.geniyz.ofp.rule.ByHourRule
 import site.geniyz.ofp.service.Content
 import site.geniyz.ofp.url.Link
+import java.time.LocalDateTime
+import java.util.TimeZone
 import kotlin.getValue
 import kotlin.test.assertEquals
+import kotlin.time.ExperimentalTime
+import kotlin.time.toJavaInstant
 
+@OptIn(ExperimentalTime::class)
 class AppTest : AutoCloseKoinTest() {
 
     @Test
@@ -33,7 +36,7 @@ class AppTest : AutoCloseKoinTest() {
 
     @Test
     fun `Добавить ссылку с нормальным правилом и проверить его обработку`() = testApplication {
-        val currentHour = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).hour
+        val currentHour = LocalDateTime.ofInstant(Clock.System.now().toJavaInstant(), TimeZone.getDefault().toZoneId() ).hour
 
         application {
             main()

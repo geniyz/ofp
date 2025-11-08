@@ -2,9 +2,7 @@
 
 package site.geniyz.ofp
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 import org.junit.Test
 import org.junit.jupiter.api.assertThrows
 import org.koin.core.context.GlobalContext.startKoin
@@ -15,10 +13,15 @@ import site.geniyz.ofp.repo.MemoRepo
 import site.geniyz.ofp.rule.ByHourRule
 import site.geniyz.ofp.rule.RuleAPI
 import site.geniyz.ofp.url.Link
+import java.time.LocalDateTime
+import java.util.TimeZone
 import kotlin.test.assertEquals
+import kotlin.time.ExperimentalTime
+import kotlin.time.toJavaInstant
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+@OptIn(ExperimentalTime::class)
 class MemoRepoTest: AutoCloseKoinTest() {
 
     @OptIn(ExperimentalUuidApi::class)
@@ -30,7 +33,7 @@ class MemoRepoTest: AutoCloseKoinTest() {
 
         val repo: IRepository = MemoRepo()
 
-        val currentHour = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).hour
+        val currentHour = LocalDateTime.ofInstant(Clock.System.now().toJavaInstant(), TimeZone.getDefault().toZoneId() ).hour
         val link = Link(code = "testByHour",
             listOf(
                 RuleAPI(
